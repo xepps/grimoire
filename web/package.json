@@ -7,12 +7,15 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit",
-    "start": "nodemon server/app.js"
+    "start": "node server/app.js"
   },
   "dependencies": {
+    "@junyiz/koa-proxy-pass": "^1.2.2",
     "core-js": "^2.6.5",
     "koa": "2.7.0",
     "koa-mount": "^4.0.0",
+    "koa-proxy": "^1.0.0-alpha.0",
+    "koa-router": "^7.4.0",
     "koa-static": "^5.0.0",
     "vue": "^2.6.10",
     "vue-router": "^3.0.3",

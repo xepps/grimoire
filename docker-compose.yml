@@ -19,6 +19,7 @@ services:
       - "8080:8081" # Forward site to localhost:8080
     environment: # Set ENV vars
      - NODE_ENV=development
+     - API_HOST=api
      - PORT=8081
 
   elasticsearch: # Elasticsearch Instance
