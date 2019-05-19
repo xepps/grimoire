@@ -21,13 +21,12 @@ export default {
   data: () => ({
     searchTerm: '',
     searchDebounce: null,
-    searchOffset: 0,
   }),
   methods: {
     onSearchInput() {
       clearTimeout(this.searchDebounce);
       this.searchDebounce = setTimeout(async () => {
-        if (this.searchTerm) await this.$store.dispatch('spells/getByTerm', { term: this.searchTerm, offset: this.searchOffset });
+        if (this.searchTerm) await this.$store.dispatch('spells/getByTerm', { term: this.searchTerm });
         else await this.$store.dispatch('spells/clearResults');
       }, 300);
     },

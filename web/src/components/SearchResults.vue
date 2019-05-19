@@ -7,14 +7,17 @@
         <p class="searchResults__item__description">{{ result._source.description }}</p>
       </li>
     </ul>
+    <LoadMore v-if="results.length" />
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
+import LoadMore from '@/components/LoadMore.vue';
 
 export default {
   name: 'SearchResults',
+  components: { LoadMore },
   computed: mapState({
     results: state => state.spells.spells,
   }),

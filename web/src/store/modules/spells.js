@@ -6,15 +6,27 @@ export default {
   state: {
     spells: [],
     hits: null,
+    offset: 0,
+    term: null,
   },
   getters: {
   },
   actions: {
-    async getByTerm({ commit }, { term, offset }) {
-      const results = await search.getByTerm(term, offset);
+    async getByTerm({ commit }, { term }) {
+      const results = await search.getByTerm(term);
 
       commit('setSpells', results.data.hits.hits);
       commit('setHits', results.data.hits.total.value);
+      commit('setOffset', 0);
+      commit('setTerm', term);
+    },
+    async nextResults({ commit, state }) {
+      if (state.offset > state.hits) return;
+      const offset = state.offset + 10;
+      const results = await search.getByTerm(state.term, offset);
+
+      commit('setSpells', state.spells.concat(results.data.hits.hits));
+      commit('setOffset', offset);
     },
     clearResults({ commit }) {
       commit('setSpells', []);
@@ -27,6 +39,12 @@ export default {
     },
     setHits(state, hits) {
       state.hits = hits;
+    },
+    setTerm(state, term) {
+      state.term = term;
+    },
+    setOffset(state, offset) {
+      state.offset = offset;
     },
   },
 };
