@@ -6,37 +6,32 @@
             v-model="searchTerm"
             v-on:keyup="onSearchInput()"
         />
-        <p class="search__hits">{{ numHits }} hits!!</p>
+        <p class="search__hits" v-if="hits">{{ hits }} hits!</p>
     </div>
 </template>
 
 <script>
-const axios = require('axios');
+import { mapState } from 'vuex';
 
 export default {
   name: 'SearchBar',
   props: {
     baseUrl: String,
   },
+  computed: mapState({
+    hits: state => state.spells.hits,
+  }),
   data: () => ({
     searchTerm: '',
     searchDebounce: null,
-    searchResults: [],
-    numHits: null,
     searchOffset: 0,
   }),
   methods: {
     onSearchInput() {
       clearTimeout(this.searchDebounce);
       this.searchDebounce = setTimeout(async () => {
-        this.searchOffset = 0;
-        this.searchResults = await this.search();
+        await this.$store.dispatch('spells/getByTerm', { term: this.searchTerm, offset: this.searchOffset });
       }, 300);
-    },
-    async search() {
-      const response = await axios.get(`${this.baseUrl}/api/search`, { params: { term: this.searchTerm, offset: this.searchOffset } });
-      this.numHits = response.data.hits.total;
-      return response.data.hits.hits;
     },
   },
 
