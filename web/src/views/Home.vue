@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <SearchBar :baseUrl="this.baseUrl" />
+    <SearchBar />
     <SearchResults />
   </div>
 </template>
@@ -15,8 +15,5 @@ export default {
     SearchBar,
     SearchResults,
   },
-  data: () => ({
-    baseUrl: window.location.origin,
-  }),
 };
 </script>

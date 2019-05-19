@@ -16,6 +16,10 @@ export default {
       commit('setSpells', results.data.hits.hits);
       commit('setHits', results.data.hits.total.value);
     },
+    clearResults({ commit }) {
+      commit('setSpells', []);
+      commit('setHits', 0);
+    },
   },
   mutations: {
     setSpells(state, spells) {

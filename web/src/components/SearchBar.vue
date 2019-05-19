@@ -1,12 +1,12 @@
 <template>
-    <div class="search">
+    <div class="searchBar">
         <input
             type="text"
-            class="search__input"
+            class="searchBar__input"
             v-model="searchTerm"
             v-on:keyup="onSearchInput()"
         />
-        <p class="search__hits" v-if="hits">{{ hits }} hits!</p>
+        <p class="searchBar__hits" v-if="hits">{{ hits }} hits!</p>
     </div>
 </template>
 
@@ -15,9 +15,6 @@ import { mapState } from 'vuex';
 
 export default {
   name: 'SearchBar',
-  props: {
-    baseUrl: String,
-  },
   computed: mapState({
     hits: state => state.spells.hits,
   }),
@@ -30,7 +27,8 @@ export default {
     onSearchInput() {
       clearTimeout(this.searchDebounce);
       this.searchDebounce = setTimeout(async () => {
-        await this.$store.dispatch('spells/getByTerm', { term: this.searchTerm, offset: this.searchOffset });
+        if (this.searchTerm) await this.$store.dispatch('spells/getByTerm', { term: this.searchTerm, offset: this.searchOffset });
+        else await this.$store.dispatch('spells/clearResults');
       }, 300);
     },
   },
