@@ -7,8 +7,8 @@ const proxyPass = require('@junyiz/koa-proxy-pass');
 const fs = require('fs');
 const path = require('path');
 const util = require('util');
-const readFile = util.promisify(fs.readFile);
 
+const readFile = util.promisify(fs.readFile);
 const apiHost = process.env.API_HOST || 'localhost';
 
 const app = new Koa();
