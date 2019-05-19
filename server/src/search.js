@@ -18,7 +18,7 @@ module.exports = {
                     "material_component"
                 ]
             } },
-            highlight: { fields: { description: {} } }
+            highlight: { fields: { "*": {} } }
         };
 
         return client.search({ index, type, body });
