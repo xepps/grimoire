@@ -15,12 +15,6 @@
         <b-card-text>{{ result._source.description.substring(0, 240) }}...</b-card-text>
         <em slot="footer">Usable by {{ result._source.casters.map(s => `${s}s`).join(', ') }}</em>
       </b-card>
-    <!-- <ul class="searchResults__list">
-      <li class="searchResults__item" v-for="result in results" :key="result.id" >
-        <h2 class="searchResults__item__name">{{ result._source.name }}</h2>
-        <p class="searchResults__item__description">{{ result._source.description }}</p>
-      </li>
-    </ul> -->
     <LoadMore v-if="results.length" />
   </div>
 </template>
