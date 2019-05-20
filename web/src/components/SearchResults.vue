@@ -1,12 +1,26 @@
 <template>
   <div class="searchResults">
-    <h1 v-if="results.length">Results</h1>
-    <ul class="searchResults__list">
+      <b-card
+        v-for="result in results"
+        :key="result.id"
+        :title="result._source.name"
+        header-tag="header"
+        footer-tag="footer"
+        class="m-4"
+      >
+        <h6 slot="header" class="mb-0">
+          A level {{ result._source.level }} {{ result._source.type }}
+          {{ result._source.level ? 'spell' : 'cantrip' }}
+        </h6>
+        <b-card-text>{{ result._source.description.substring(0, 240) }}...</b-card-text>
+        <em slot="footer">Usable by {{ result._source.casters.map(s => `${s}s`).join(', ') }}</em>
+      </b-card>
+    <!-- <ul class="searchResults__list">
       <li class="searchResults__item" v-for="result in results" :key="result.id" >
         <h2 class="searchResults__item__name">{{ result._source.name }}</h2>
         <p class="searchResults__item__description">{{ result._source.description }}</p>
       </li>
-    </ul>
+    </ul> -->
     <LoadMore v-if="results.length" />
   </div>
 </template>
@@ -25,23 +39,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .searchResults__list {
-    list-style: none;
-    padding-left: 0;
-  }
-
-  .searchResults__item {
-    text-align: left;
-    display: flex;
-  }
-
-  .searchResults__item__name {
-    flex: 1;
-    text-align: center;
-  }
-
-  .searchResults__item__description {
-    width: 80%;
+  .card-text {
     white-space: pre-wrap;
   }
 </style>

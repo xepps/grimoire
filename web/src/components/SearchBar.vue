@@ -1,23 +1,17 @@
 <template>
     <div class="searchBar">
-        <input
-            type="text"
+        <b-form-input
             class="searchBar__input"
             v-model="searchTerm"
+            placeholder="What might you find..."
             v-on:keyup="onSearchInput()"
         />
-        <p class="searchBar__hits" v-if="hits">{{ hits }} hits!</p>
     </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
-
 export default {
   name: 'SearchBar',
-  computed: mapState({
-    hits: state => state.spells.hits,
-  }),
   data: () => ({
     searchTerm: '',
     searchDebounce: null,

@@ -1,18 +1,18 @@
 <template>
   <div class="home">
-    <SearchBar />
+    <HeroSearch />
     <SearchResults />
   </div>
 </template>
 
 <script>
-import SearchBar from '@/components/SearchBar.vue';
+import HeroSearch from '@/components/HeroSearch.vue';
 import SearchResults from '@/components/SearchResults.vue';
 
 export default {
   name: 'home',
   components: {
-    SearchBar,
+    HeroSearch,
     SearchResults,
   },
 };
