@@ -17,7 +17,7 @@ export default {
     searchDebounce: null,
   }),
   async created() {
-    await this.$store.dispatch('spells/getByTerm', { term: null });
+    await this.$store.dispatch('spells/getByTerm', { term: this.searchTerm });
   },
   methods: {
     onSearchInput() {
