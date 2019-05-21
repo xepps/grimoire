@@ -28,7 +28,12 @@ async function putSpellMapping() {
         uri: { type: 'text' },
         casters: { type: 'keyword' },
         type: { type: 'keyword' },
-        name: { type: 'text' },
+        name: {
+            type: 'text',
+            fields: {
+                raw: { type: "keyword" }
+            }
+        },
         duration: { type: 'text' },
         range: { type: 'text' },
         description: { type: 'text' },

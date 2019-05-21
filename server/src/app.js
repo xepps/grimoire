@@ -36,10 +36,22 @@ router.get('/search',
             term: joi.string().max(60).required(),
             offset: joi.number().integer().min(0).default(0)
         }
-    }), 
+    }),
     async ctx => {
         const { term, offset } = ctx.request.query;
         ctx.body = await search.queryTerm(term, offset);
+    }
+);
+
+router.get('/all',
+    validate({
+        query: {
+            offset: joi.number().integer().min(0).default(0)
+        },
+    }),
+    async ctx => {
+        const { offset } = ctx.request.query;
+        ctx.body = await search.all(offset);
     }
 );
 

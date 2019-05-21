@@ -8,7 +8,7 @@ module.exports = {
                 query: term,
                 operator: 'and',
                 fuzziness: 'auto',
-                fields: [ 
+                fields: [
                     "at_higher_levels^2",
                     "casting_time",
                     "name^3",
@@ -22,5 +22,18 @@ module.exports = {
         };
 
         return client.search({ index, type, body });
-    }
+    },
+    all: (offset = 0) => {
+        const body = {
+            query: {
+                match_all: {}
+            },
+            from: offset,
+            sort: [
+                { "level": { order: "asc" } },
+                { "name.raw": { order: "asc" } }
+            ]
+        };
+        return client.search({ index, type, body });
+    },
 }

@@ -16,12 +16,14 @@ export default {
     searchTerm: '',
     searchDebounce: null,
   }),
+  async created() {
+    await this.$store.dispatch('spells/getByTerm', { term: null });
+  },
   methods: {
     onSearchInput() {
       clearTimeout(this.searchDebounce);
       this.searchDebounce = setTimeout(async () => {
-        if (this.searchTerm) await this.$store.dispatch('spells/getByTerm', { term: this.searchTerm });
-        else await this.$store.dispatch('spells/clearResults');
+        await this.$store.dispatch('spells/getByTerm', { term: this.searchTerm });
       }, 300);
     },
   },

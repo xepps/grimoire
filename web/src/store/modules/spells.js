@@ -12,7 +12,7 @@ export default {
   getters: {
   },
   actions: {
-    async getByTerm({ commit }, { term }) {
+    async getByTerm({ commit }, { term = null }) {
       const results = await search.getByTerm(term);
 
       commit('setSpells', results.data.hits.hits);
