@@ -57,10 +57,11 @@ router.get('/all',
 
 const port = process.env.PORT || 3000
 
-app
+module.exports = app
     .use(router.routes())
     .use(router.allowedMethods())
     .listen(port, err => {
         if (err) throw err;
         console.log(`App Listening on Port ${port}`);
     });
+
