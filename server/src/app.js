@@ -8,19 +8,19 @@ const app = new Koa();
 const router = new Router();
 
 app.use(async (ctx, next) => {
-    const start = Date.now();
-    await next();
-    const ms = Date.now() - start;
-    console.log((`${ctx.method} ${ctx.url} - ${ms}`));
-})
+  const start = Date.now();
+  await next();
+  const ms = Date.now() - start;
+  console.log((`${ctx.method} ${ctx.url} - ${ms}`));
+});
 
-app.on('error', err => {
-    console.error('Server Error', err);
+app.on('error', (err) => {
+  console.error('Server Error', err);
 });
 
 app.use(async (ctx, next) => {
-    ctx.set('Access-Control-Allow-Origin', '*');
-    return next();
+  ctx.set('Access-Control-Allow-Origin', '*');
+  return next();
 });
 
 /**
@@ -31,36 +31,28 @@ app.use(async (ctx, next) => {
  * offset: positive integer
  */
 router.get('/search',
-    validate({
-        query: {
-            term: joi.string().max(60).required(),
-            offset: joi.number().integer().min(0).default(0)
-        }
-    }),
-    async ctx => {
-        const { term, offset } = ctx.request.query;
-        ctx.body = await search.queryTerm(term, offset);
-    }
-);
+  validate({
+    query: {
+      term: joi.string().max(60).required(),
+      offset: joi.number().integer().min(0).default(0),
+    },
+  }),
+  async (ctx) => {
+    const { term, offset } = ctx.request.query;
+    ctx.body = await search.queryTerm(term, offset);
+  });
 
 router.get('/all',
-    validate({
-        query: {
-            offset: joi.number().integer().min(0).default(0)
-        },
-    }),
-    async ctx => {
-        const { offset } = ctx.request.query;
-        ctx.body = await search.all(offset);
-    }
-);
+  validate({
+    query: {
+      offset: joi.number().integer().min(0).default(0),
+    },
+  }),
+  async (ctx) => {
+    const { offset } = ctx.request.query;
+    ctx.body = await search.all(offset);
+  });
 
-const port = process.env.PORT || 3000
-
-app
-    .use(router.routes())
-    .use(router.allowedMethods())
-    .listen(port, err => {
-        if (err) throw err;
-        console.log(`App Listening on Port ${port}`);
-    });
+module.exports = app
+  .use(router.routes())
+  .use(router.allowedMethods());
