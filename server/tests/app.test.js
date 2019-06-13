@@ -24,23 +24,31 @@ const newApp = () => {
 
 tape('app route :: /search', async (t) => {
     const app = newApp()
-    await supertest(app)
-        .get('/all')
-        .expect('Content-Type', /json/)
-        .expect(200)
-
-    app.close()
-    t.end()
+    try {
+        await supertest(app)
+            .get('/search?term=test')
+            .expect('Content-Type', /json/)
+            .expect(200)
+    } catch (err) {
+        t.fail('An uncaught error occurred during testing:' + err.stack)
+    } finally {
+        app.close()
+        t.end()
+    }
 })
 
 tape('app route :: /all', async (t) => {
     const app = newApp()
-    await supertest(app)
-        .get('/all')
-        .expect('Content-Type', /json/)
-        .expect(200)
-
-    app.close()
-    t.end()
+    try {
+        await supertest(app)
+            .get('/all')
+            .expect('Content-Type', /json/)
+            .expect(200)
+    } catch (err) {
+        t.fail('An uncaught error occurred during testing:' + err.stack)
+    } finally {
+        app.close()
+        t.end()
+    }
 })
 
