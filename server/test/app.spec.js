@@ -70,7 +70,8 @@ describe('routes', () => {
 
     it('should throw an error if a term is passed with length more than 60 characters', async () => {
       console.error = jest.fn();
-      const response = await request(server).get('/search?term=1234567890123456789012345678901234567890123456789012345678901');
+      const longTerm = '1234567890123456789012345678901234567890123456789012345678901';
+      const response = await request(server).get(`/search?term=${longTerm}`);
       expect(response.statusCode).toBe(400);
     });
 
