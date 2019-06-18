@@ -1,5 +1,5 @@
 {
-  "name": "grimoire",
+  "name": "grimoire-api",
   "version": "0.0.1",
   "description": "D&D Spell look up using elastic search",
   "scripts": {
