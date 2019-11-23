@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@junyiz/koa-proxy-pass": "^1.2.2",
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "bootstrap": "^4.3.1",
     "bootstrap-vue": "^2.0.0-rc.20",
     "core-js": "^2.6.5",
