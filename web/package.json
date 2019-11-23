@@ -1,11 +1,12 @@
 {
-  "name": "grimoire",
+  "name": "grimoire-web",
   "version": "0.1.0",
   "private": true,
   "scripts": {
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "test:unit": "vue-cli-service test:unit",
+    "test": "npm run test:unit",
     "start": "node server/app.js",
     "dev:server": "pm2 start server/app.js --watch --name server",
     "dev:web": "vue-cli-service build --mode development --watch",
