@@ -17,7 +17,7 @@
 
 <style lang="scss" scoped>
   .navbar-light {
-    background: #EEE5CE;
+    // background: #EEE5CE;
     border-bottom: #9d0a0e 3px solid;
   }
 
