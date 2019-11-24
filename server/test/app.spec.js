@@ -45,7 +45,7 @@ describe('routes', () => {
     it('should rank results based on a custom sort', async () => {
       const response = await request(server).get('/search?term=fire');
       expect(response.body.calledESWith.body.query.multi_match.fields).toStrictEqual([
-        'at_higher_levels^2', 'casting_time', 'name^3', 'duration', 'range', 'description^2', 'material_component',
+        'at_higher_levels^2', 'casting_time', 'name^3', 'duration', 'range', 'description^2', 'material_component', 'type^3',
       ]);
       expect(response.statusCode).toBe(200);
     });

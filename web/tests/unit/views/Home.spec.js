@@ -1,17 +1,19 @@
 /* eslint-disable import/no-unresolved */
-import { shallowMount } from '@vue/test-utils';
+import { shallowMount, createLocalVue } from '@vue/test-utils';
 import Home from '@/views/Home.vue';
 import SearchResults from '@/components/SearchResults.vue';
-import HeroSearch from '@/components/HeroSearch.vue';
+import BootstrapVue from 'bootstrap-vue';
+
+const localVue = createLocalVue();
+localVue.use(BootstrapVue);
 
 describe('HelloWorld.vue', () => {
-  it('renders a header', () => {
-    const wrapper = shallowMount(Home);
-    expect(wrapper.find(HeroSearch)).toBeDefined();
+  let wrapper = null;
+  beforeEach(() => {
+    wrapper = shallowMount(Home, { localVue });
   });
 
   it('renders a space for the results', () => {
-    const wrapper = shallowMount(Home);
     expect(wrapper.find(SearchResults)).toBeDefined();
   });
 });
