@@ -1,19 +1,22 @@
 <template>
   <div class="spell">
-    <HeroSearch />
-    <SpellResult :slug="$route.params.id" />
+    <b-container>
+      <SpellResult :slug="$route.params.id" />
+      <h2>More like this</h2>
+      <SearchResults limit="3" :filter="$route.params.id"/>
+    </b-container>
   </div>
 </template>
 
 <script>
-import HeroSearch from '@/components/HeroSearch.vue';
 import SpellResult from '@/components/SpellResult.vue';
+import SearchResults from '@/components/SearchResults.vue';
 
 export default {
   name: 'spell',
   components: {
-    HeroSearch,
     SpellResult,
+    SearchResults,
   },
 };
 </script>

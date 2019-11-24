@@ -1,5 +1,5 @@
 <template>
-  <b-container class="spell-result" v-if="spell">
+  <div class="spell-result" v-if="spell">
     <h1>{{ spell.name }}</h1>
     <h2>{{ spellShortDescription }} </h2>
     <b-row>
@@ -17,7 +17,7 @@
         {{ paragraph }}
       </p>
     </div>
-  </b-container>
+  </div>
 </template>
 
 <script>
