@@ -55,18 +55,21 @@ export default {
     };
   },
   async created() {
-    this.fetchSpell();
-  },
-  watch: {
-    $route: 'fetchData',
+    await this.updateSpell();
   },
   methods: {
     setData(data) {
       this.spell = data;
     },
-    async fetchSpell() {
+    async updateSpell() {
       const result = await search.getBySlug(this.slug);
       this.spell = result.data;
+      await this.$store.dispatch('spells/getByTerm', { term: this.spell.name.split(' ').pop() });
+    },
+  },
+  watch: {
+    async slug() {
+      await this.updateSpell();
     },
   },
 };

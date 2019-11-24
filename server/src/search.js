@@ -17,6 +17,7 @@ module.exports = {
             'range',
             'description^2',
             'material_component',
+            'type^3',
           ],
         },
       },
