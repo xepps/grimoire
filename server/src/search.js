@@ -17,10 +17,22 @@ module.exports = {
             'range',
             'description^2',
             'material_component',
+            'type^3',
           ],
         },
       },
       highlight: { fields: { '*': {} } },
+    };
+
+    return client.search({ index, type, body });
+  },
+  getBySlug: (slug) => {
+    const body = {
+      query: {
+        term: {
+          uri: slug,
+        },
+      },
     };
 
     return client.search({ index, type, body });

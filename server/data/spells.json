@@ -5791,7 +5791,7 @@
         "at_higher_levels": null,
         "level": 9,
         "casting_time": "1 Minute",
-        "uri": "z",
+        "uri": "imprisonment",
         "casters": [
             "Warlock",
             "Wizard"

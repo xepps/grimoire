@@ -1,18 +1,15 @@
 <template>
-  <div class="home">
-    <HeroSearch />
+  <b-container class="home">
     <SearchResults />
-  </div>
+  </b-container>
 </template>
 
 <script>
-import HeroSearch from '@/components/HeroSearch.vue';
 import SearchResults from '@/components/SearchResults.vue';
 
 export default {
   name: 'home',
   components: {
-    HeroSearch,
     SearchResults,
   },
 };

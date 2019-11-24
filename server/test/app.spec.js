@@ -45,7 +45,7 @@ describe('routes', () => {
     it('should rank results based on a custom sort', async () => {
       const response = await request(server).get('/search?term=fire');
       expect(response.body.calledESWith.body.query.multi_match.fields).toStrictEqual([
-        'at_higher_levels^2', 'casting_time', 'name^3', 'duration', 'range', 'description^2', 'material_component',
+        'at_higher_levels^2', 'casting_time', 'name^3', 'duration', 'range', 'description^2', 'material_component', 'type^3',
       ]);
       expect(response.statusCode).toBe(200);
     });
@@ -78,6 +78,21 @@ describe('routes', () => {
     it('should not allow negative offsets', async () => {
       console.error = jest.fn();
       const response = await request(server).get('/search?term=fire&offset=-1');
+      expect(response.statusCode).toBe(400);
+    });
+  });
+
+  describe('/spell/:slug', () => {
+    it('should query es with a slug', async () => {
+      const response = await request(server).get('/spell/wish');
+      expect(response.body.calledESWith.body.query.term.uri).toStrictEqual('wish');
+      expect(response.statusCode).toBe(200);
+    });
+
+    it('should throw an error if a slug is passed with length more than 60 characters', async () => {
+      console.error = jest.fn();
+      const longSlug = '1234567890123456789012345678901234567890123456789012345678901';
+      const response = await request(server).get(`/spell/${longSlug}`);
       expect(response.statusCode).toBe(400);
     });
   });
