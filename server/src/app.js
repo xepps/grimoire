@@ -53,6 +53,19 @@ router.get('/all',
     ctx.body = await search.all(offset);
   });
 
+router.get('/spell/:slug',
+  validate({
+    params: {
+      slug: joi.string().max(60).required(),
+    },
+  }),
+  async (ctx) => {
+    const result = await search.getBySlug(ctx.params.slug);
+    // eslint-disable-next-line no-underscore-dangle
+    if (result.hits.total.value) ctx.body = result.hits.hits[0]._source;
+    else ctx.body = null;
+  });
+
 module.exports = app
   .use(router.routes())
   .use(router.allowedMethods());

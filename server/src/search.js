@@ -25,6 +25,17 @@ module.exports = {
 
     return client.search({ index, type, body });
   },
+  getBySlug: (slug) => {
+    const body = {
+      query: {
+        term: {
+          uri: slug,
+        },
+      },
+    };
+
+    return client.search({ index, type, body });
+  },
   all: (offset = 0) => {
     const body = {
       query: {

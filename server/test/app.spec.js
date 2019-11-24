@@ -81,4 +81,19 @@ describe('routes', () => {
       expect(response.statusCode).toBe(400);
     });
   });
+
+  describe('/spell/:slug', () => {
+    it('should query es with a slug', async () => {
+      const response = await request(server).get('/spell/wish');
+      expect(response.body.calledESWith.body.query.term.uri).toStrictEqual('wish');
+      expect(response.statusCode).toBe(200);
+    });
+
+    it('should throw an error if a slug is passed with length more than 60 characters', async () => {
+      console.error = jest.fn();
+      const longSlug = '1234567890123456789012345678901234567890123456789012345678901';
+      const response = await request(server).get(`/spell/${longSlug}`);
+      expect(response.statusCode).toBe(400);
+    });
+  });
 });

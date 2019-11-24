@@ -26,7 +26,7 @@ async function putSpellMapping() {
     at_higher_levels: { type: 'text' },
     level: { type: 'integer' },
     casting_time: { type: 'text' },
-    uri: { type: 'text' },
+    uri: { type: 'keyword' },
     casters: { type: 'keyword' },
     type: { type: 'keyword' },
     name: {
