@@ -24,6 +24,7 @@ export default {
       clearTimeout(this.searchDebounce);
       this.searchDebounce = setTimeout(async () => {
         await this.$store.dispatch('spells/getByTerm', { term: this.searchTerm });
+        this.$router.push('/');
       }, 300);
     },
   },

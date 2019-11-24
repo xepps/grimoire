@@ -1,11 +1,10 @@
 <template>
-  <div class="spell">
-    <b-container>
-      <SpellResult :slug="$route.params.id" />
-      <h2>More like this</h2>
-      <SearchResults :limit="3" :filter="$route.params.id"/>
-    </b-container>
-  </div>
+  <b-container class="spell">
+    <SpellResult :slug="$route.params.id" />
+    <hr>
+    <h2 class="mt-4">More like this</h2>
+    <SearchResults :limit="3" :filter="$route.params.id"/>
+  </b-container>
 </template>
 
 <script>

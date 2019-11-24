@@ -1,8 +1,9 @@
 <template>
-  <div class="searchResults">
-      <b-card-group columns class="m-4">
-        <SearchResult v-for="result in limitedResults" :key="result.id" :result="result" />
-      </b-card-group>
+  <div class="searchResults mb-4">
+    <b-card-group columns>
+      <SearchResult v-for="result in limitedResults" :key="result._id" :result="result" />
+    </b-card-group>
+    <h5 v-if="!limitedResults.length">No results found</h5>
     <LoadMore v-if="results.length" />
   </div>
 </template>
@@ -40,3 +41,17 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.card-columns {
+  @media (min-width: 576px) {
+    column-count: 1;
+  }
+  @media (min-width: 768px) {
+    column-count: 2;
+  }
+  @media (min-width: 992px) {
+    column-count: 3;
+  }
+}
+</style>

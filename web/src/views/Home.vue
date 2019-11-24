@@ -1,7 +1,7 @@
 <template>
-  <div class="home">
+  <b-container class="home">
     <SearchResults />
-  </div>
+  </b-container>
 </template>
 
 <script>
