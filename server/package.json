@@ -19,7 +19,7 @@
   "homepage": "https://github.com/xepps/grimoire#readme",
   "dependencies": {
     "elasticsearch": "16.0.0",
-    "@hapi/joi": "15.0.3",
+    "@hapi/joi": "15.1.1",
     "koa": "2.7.0",
     "koa-joi-validate": "xepps/koa-joi-validate",
     "koa-router": "7.4.0"
